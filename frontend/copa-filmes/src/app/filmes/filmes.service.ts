@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Filme } from '../models/filme';
+import { Observable } from 'rxjs';
+
+@Injectable({
+	providedIn: 'root'
+})
+export class FilmesService {
+
+	private base_url = 'https://localhost:44337/api';
+
+	constructor(private http: HttpClient) { }
+
+	public obterFilmes(): Observable<Filme[]> {
+		return this.http.get<Filme[]>(`${this.base_url}/filmes`);
+	}
+
+	public gerarCampeonato(filmes: Filme[]): Observable<any> {
+		let headers = new HttpHeaders()
+			.append('Access-Control-Allow-Origin', '*')
+			.append('Content-Type', 'application/json; charset=utf-8');
+		console.log(headers);
+		return this.http.post<Filme[]>(`${this.base_url}/campeonato`, filmes, { headers: headers });
+	}
+}
