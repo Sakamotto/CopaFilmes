@@ -126,6 +126,66 @@ namespace CopaFilmesTests.Services
             result.Values.First().Titulo.Should().Be("Os Incríveis 2");
         }
 
+        [Fact]
+        public void RealizarPartida_DeveRetornarVencedorComoChave()
+        {
+            var service = new CampeonatoService();
+
+            var filme1 = new Filme()
+            {
+                Id = "tt7784604",
+                Ano = 2018,
+                Nota = 7.8M,
+                Titulo = "Hereditário"
+            };
+
+            var filme2 = new Filme()
+            {
+                Id = "tt5164214",
+                Ano = 2018,
+                Nota = 6.3M,
+                Titulo = "Oito Mulheres e um Segredo"
+            };
+
+            var result = service.RealizarPartida(filme1, filme2);
+
+            // o vencedor está na chave
+            result.Keys.First().Titulo.Should().Be(filme1.Titulo);
+
+            // o segundo colocado está no valor
+            result.Values.First().Titulo.Should().Be(filme2.Titulo);
+        }
+
+        [Fact]
+        public void RealizarPartida_DeveRetornarVencedorComoChaveComEntradaForaDeOrdem()
+        {
+            var service = new CampeonatoService();
+
+            var filme1 = new Filme()
+            {
+                Id = "tt7784604",
+                Ano = 2018,
+                Nota = 7.8M,
+                Titulo = "Hereditário"
+            };
+
+            var filme2 = new Filme()
+            {
+                Id = "tt5164214",
+                Ano = 2018,
+                Nota = 6.3M,
+                Titulo = "Oito Mulheres e um Segredo"
+            };
+
+            var result = service.RealizarPartida(filme2, filme1);
+
+            // o vencedor está na chave
+            result.Keys.First().Titulo.Should().Be(filme1.Titulo);
+
+            // o segundo colocado está no valor
+            result.Values.First().Titulo.Should().Be(filme2.Titulo);
+        }
+
         private Dictionary<Filme, Filme> GetListaFilmes()
         {
             var dicFilmes = new Dictionary<Filme, Filme>();

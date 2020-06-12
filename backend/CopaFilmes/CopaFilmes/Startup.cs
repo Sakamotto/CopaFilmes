@@ -21,7 +21,18 @@ namespace CopaFilmes
         public void ConfigureServices(IServiceCollection services)
         {
             AddDependecyInjection(services);
+
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Copa dos Filmes",
+                    Version = "v1",
+                    Description = "Aplicação para gerar um campeonato entre filmes",
+                });
+            });
 
             services.AddCors(options =>
             {
@@ -42,6 +53,13 @@ namespace CopaFilmes
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Ativando middlewares para uso do Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Copa dos Filmes V1");
+            });
 
             app.UseCors();
 
