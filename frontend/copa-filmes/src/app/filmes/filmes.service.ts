@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from '../models/filme';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class FilmesService {
 
-	public base_url = 'http://localhost:5001/api';
+	public base_url = environment.baseUrl;
 	public filmesSelecionados: Filme[];
 
 	constructor(private http: HttpClient) { }
