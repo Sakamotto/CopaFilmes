@@ -16,12 +16,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 
 import { FilmesService } from './filmes/filmes.service';
+import { FinalCampeonatoComponent } from './final-campeonato/final-campeonato.component';
+import { BannerComponent } from './shared-components/banner/banner.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilmesComponent
+    FilmesComponent,
+    FinalCampeonatoComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import { FilmesService } from './filmes/filmes.service';
     MatCardModule,
     MatListModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [FilmesService],
   bootstrap: [AppComponent]

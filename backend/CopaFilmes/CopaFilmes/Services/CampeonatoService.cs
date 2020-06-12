@@ -42,8 +42,10 @@ namespace CopaFilmes.Services
         {
             var vencedores = RealizarDisputa(chaves);
 
-            if (vencedores.Count == 1) return vencedores;
+            // Se for a final, retorna o resultado da disputa entre os dois finalistas
+            if (vencedores.Count == 1) return RealizarPartida(vencedores.Single().Key, vencedores.Single().Value);
 
+            // caso contrário continua computando os vencedores
             return ObterVencedor(vencedores);
 
         }
@@ -55,7 +57,8 @@ namespace CopaFilmes.Services
 
             foreach (var filme in chaves)
             {
-                vencedores.Add(RealizarPartida(filme));
+                var resultado = RealizarPartida(filme.Key, filme.Value);
+                vencedores.Add(resultado.Single().Key);
             }
 
             int skip = 0;
@@ -73,9 +76,20 @@ namespace CopaFilmes.Services
             return chaveVencedores;
         }
 
-        public Filme RealizarPartida(KeyValuePair<Filme, Filme> filmes)
+        public Dictionary<Filme, Filme> RealizarPartida(Filme chaveEsquerda, Filme chaveDireita)
         {
-            return filmes.Key.Nota >= filmes.Value.Nota ? filmes.Key : filmes.Value;
+            var resultado = new Dictionary<Filme, Filme>();
+
+            var tempList = new List<Filme>()
+            {
+                chaveEsquerda,
+                chaveDireita
+            };
+
+            tempList = tempList.OrderByDescending(f => f.Nota).ThenBy(f => f.Titulo).ToList();
+            resultado.Add(tempList[0], tempList[1]);
+
+            return resultado;
         }
     }
 }

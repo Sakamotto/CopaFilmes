@@ -1,0 +1,25 @@
+.card-final {
+    display: grid;
+    grid-template-columns: 5% 95%;
+    margin: 20px;
+    width: auto;
+    justify-content: center;
+}
+
+.card-final-not-found {
+    margin: 20px;
+    width: auto;
+}
+
+.card-final p {
+    font-size: 30px;
+}
+
+.mat-card-header {
+    background-color: gray;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+}

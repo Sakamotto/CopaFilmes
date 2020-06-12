@@ -8,6 +8,6 @@ export class Filme {
 
     public titulo: string;
 
-    public isSelected: boolean;
+    public isSelected?: boolean;
 
 }

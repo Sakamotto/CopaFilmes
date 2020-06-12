@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class FilmesService {
 
 	private base_url = 'https://localhost:44337/api';
+	public filmesSelecionados: Filme[];
 
 	constructor(private http: HttpClient) { }
 
@@ -20,7 +21,7 @@ export class FilmesService {
 		let headers = new HttpHeaders()
 			.append('Access-Control-Allow-Origin', '*')
 			.append('Content-Type', 'application/json; charset=utf-8');
-		console.log(headers);
+
 		return this.http.post<Filme[]>(`${this.base_url}/campeonato`, filmes, { headers: headers });
 	}
 }

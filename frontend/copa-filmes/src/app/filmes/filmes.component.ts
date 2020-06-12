@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmesService } from './filmes.service';
 import { Filme } from '../models/filme';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-filmes',
@@ -9,12 +11,13 @@ import { Filme } from '../models/filme';
 })
 export class FilmesComponent implements OnInit {
 
-	constructor(private filmesService: FilmesService) { }
+	constructor(private filmesService: FilmesService,
+		private router: Router,
+		private _snackBar: MatSnackBar) { }
 
-	public filmes: Filme[];
+	public filmes: Filme[] = new Array<Filme>();
 
 	ngOnInit() {
-		console.log(this.filmesService);
 		this.filmesService.obterFilmes()
 			.subscribe(data => {
 				this.filmes = data;
@@ -26,8 +29,21 @@ export class FilmesComponent implements OnInit {
 	}
 
 	public gerarCampeonato() {
-		this.filmesService.gerarCampeonato(this.obterFilmesSelecionados())
-			.subscribe(data => console.log('data: ', data));
+		const filmesSelecionado = this.filmes.filter(f => f.isSelected);
+
+		if (filmesSelecionado.length < 8 || filmesSelecionado.length > 8) {
+			this.openSnackBar('Você precisa selecionar 8 filmes', 'OK');
+			return;
+		}
+
+		this.filmesService.filmesSelecionados = this.obterFilmesSelecionados();
+		this.router.navigate(['/final-campeonato']);
+	}
+
+	private openSnackBar(message: string, action: string) {
+		this._snackBar.open(message, action, {
+			duration: 2000,
+		});
 	}
 
 }

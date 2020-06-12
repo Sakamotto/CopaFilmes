@@ -1,34 +1,38 @@
 <div class="container">
 
-    <div class="banner-info">
-        <p>Campeonato de Filmes</p>
-        <p class="banner-title">Fase de Seleção</p>
-        <hr style="width: 30px;" />
-        <p class="banner-description">
-            Selecione 8 filmes que você deseja que entrem na competição e depois pressione o
-            botão Gerar Meu Campeonato para prosseguir.
-        </p>
-    </div>
+    <app-banner [title]="'Fase de Seleção'"
+        [subtitle]="'Selecione 8 filmes que você deseja que entrem na competição e depois pressione o botão Gerar Meu Campeonato para prosseguir.'">
+    </app-banner>
 
     <div class="selecao-filmes">
 
-        <div>
+        <span style="margin: 0 20px; text-align: left;">
+            Selecione de 0 a 8 filmes 
+            ({{obterFilmesSelecionados().length}})
+        </span>
+
+        <div style="margin: 0 20px; text-align: right;">
             <button mat-raised-button (click)="gerarCampeonato()">GERAR MEU CAMPEONATO</button>
         </div>
 
-        <mat-grid-list cols="4" rowHeight="2:1">
+        <mat-grid-list cols="4" rowHeight="3:1">
             <mat-grid-tile *ngFor="let filme of filmes">
                 <mat-card class="card">
+                    <mat-checkbox class="card-checkbox" [(ngModel)]="filme.isSelected"></mat-checkbox>
                     <mat-card-header>
-                        <mat-card-title class="class-header-right">{{filme.titulo}}</mat-card-title>
-                        <mat-card-subtitle class="class-header-right">{{filme.ano}}</mat-card-subtitle>
-                        <mat-checkbox class="class-header-left" [(ngModel)]="filme.isSelected"></mat-checkbox>
+                        <mat-card-title class="card-title">{{filme.titulo}}</mat-card-title>
+                        <mat-card-subtitle>{{filme.ano}}</mat-card-subtitle>
                     </mat-card-header>
+
                 </mat-card>
             </mat-grid-tile>
 
         </mat-grid-list>
 
     </div>
+
+    <footer style="margin-top: 30px;">
+
+    </footer>
 
 </div>

@@ -1,0 +1,36 @@
+<div class="container" style="height: 100%;">
+    <app-banner [title]="'Resultado Final'"
+        [subtitle]="'Veja o resultado final do Campeonato de Filmes de forma simples e rápida'">
+    </app-banner>
+
+    <div class="selecao-filmes">
+
+        <div style="margin: 0 20px; text-align: right;">
+            <button mat-raised-button (click)="voltar()">VOLTAR</button>
+        </div>
+
+        <div *ngIf="!resultadoFinal">
+            <mat-card class="card-final-not-found">
+                <mat-card-title class="card-title">Ooops! ... acho que você não selecionou nenhum filme :(
+                </mat-card-title>
+            </mat-card>
+        </div>
+
+        <div *ngIf="resultadoFinal">
+            <mat-card class="card-final">
+                <div>
+                    <p>1º</p>
+                </div>
+                <mat-card-title class="card-title">{{resultadoFinal.primeiro.titulo}}</mat-card-title>
+            </mat-card>
+
+            <mat-card class="card-final">
+                <div>
+                    <p>2º</p>
+                </div>
+                <mat-card-title class="card-title">{{resultadoFinal.segundo.titulo}}</mat-card-title>
+            </mat-card>
+        </div>
+
+    </div>
+</div>
