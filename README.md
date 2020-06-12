@@ -24,3 +24,11 @@ para evitar o trabalho de ter que executar o backend e o frontend é só acessar
 e https://copa-filmes-api.herokuapp.com/swagger/index.html (servidor)
 
 
+## Tecnologias Utilizadas
+ * .NET Core 3.1
+ * Angular 8.3
+ * xUnit para os testes no backend
+ * Jasmine e Karma para os testes no frontend
+
+
+
