@@ -13,7 +13,7 @@ export class FilmesComponent implements OnInit {
 
 	constructor(private filmesService: FilmesService,
 		private router: Router,
-		private _snackBar: MatSnackBar) { }
+		public _snackBar: MatSnackBar) { }
 
 	public filmes: Filme[] = new Array<Filme>();
 
@@ -29,14 +29,14 @@ export class FilmesComponent implements OnInit {
 	}
 
 	public gerarCampeonato() {
-		const filmesSelecionado = this.filmes.filter(f => f.isSelected);
+		const filmesSelecionado = this.obterFilmesSelecionados();
 
 		if (filmesSelecionado.length < 8 || filmesSelecionado.length > 8) {
 			this.openSnackBar('Você precisa selecionar 8 filmes', 'OK');
 			return;
 		}
 
-		this.filmesService.filmesSelecionados = this.obterFilmesSelecionados();
+		this.filmesService.filmesSelecionados = filmesSelecionado;
 		this.router.navigate(['/final-campeonato']);
 	}
 

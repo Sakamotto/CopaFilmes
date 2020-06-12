@@ -16,7 +16,6 @@ export class FinalCampeonatoComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-
 		if (this.filmesService.filmesSelecionados) {
 			this.filmesService.gerarCampeonato(this.filmesService.filmesSelecionados)
 				.subscribe(data => {

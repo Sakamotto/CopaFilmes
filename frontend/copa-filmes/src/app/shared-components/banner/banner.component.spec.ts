@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { BannerComponent } from './banner.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('BannerComponent', () => {
   let component: BannerComponent;
@@ -11,9 +12,9 @@ describe('BannerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BannerComponent ]
+      declarations: [BannerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class FilmesService {
 
-	private base_url = 'https://localhost:44337/api';
+	public base_url = 'https://localhost:44337/api';
 	public filmesSelecionados: Filme[];
 
 	constructor(private http: HttpClient) { }
